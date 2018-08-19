@@ -25,7 +25,6 @@ class Middleware {
     PrintWriter out;
     BufferedReader in;
 
-
     private Middleware() { }
 
     public static Middleware getMiddleware() {
@@ -44,11 +43,14 @@ class Middleware {
     }
 
     public void registerService(String serviceName, String host, String portNumber) {
+        System.out.println("Register service " + serviceName);
         Service_Directory = new HashMap<String, String[]>();
         Service_Directory.put(serviceName, new String[]{host, portNumber});
+        out.println("Service : " + serviceName + " registered");
     }
 
     public void initialize() throws Exception {
+        System.out.println("Middleware service started");
         listener = new ServerSocket(mware_port);
         try {
             while (true) {
@@ -59,7 +61,7 @@ class Middleware {
                     out.println("Connection with Middleware Success");
                     try {
                         String findRequest = in.readLine();
-                        System.out.println(findRequest);
+                        System.out.println("new request : " + findRequest);
                         middleware.executeService(findRequest);
                     } catch (Exception e) {
                         throw e;
@@ -74,11 +76,11 @@ class Middleware {
     }
 
     private void executeService(String findRequest) throws Exception {
-        middleware.registerService("addservice", "localhost", "9999");
         String request[] = findRequest.split(",");
-        System.out.println(request[1]);
+        if (request[0].equalsIgnoreCase("registerService")) {
+            middleware.registerService(request[1], request[2], request[3]);
+        }
         if ( Service_Directory.containsKey(request[0]) ) {
-            // out.println(findRequest + " service is available");
             String value[] = Service_Directory.get(request[0]);
             middleware.connectService(value, findRequest);
         } else {
@@ -93,7 +95,7 @@ class Middleware {
             BufferedReader input = new BufferedReader(new InputStreamReader(service_socket.getInputStream()));
             output.println(request);
             String response = input.readLine();
-            out.println(response);
+            out.println("Server Response : " + response);
         } catch (Exception e) {
             throw e;
         } finally {

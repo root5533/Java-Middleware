@@ -27,13 +27,12 @@ class Client {
 
     public static void main(String[] args) throws IOException {
         Client client = new Client();
-        String a[] = {"1", "2"};
-        client.getService("addservice", a);
+        client.getService(args[0], args);
     }    
 
     public void getService(String service, String val[]) {
         try {
-            for (int i = 0; i < val.length; i++) {
+            for (int i = 1; i < val.length; i++) {
                 service = service + "," + val[i];
             }
             output.println(service);

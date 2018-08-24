@@ -68,8 +68,8 @@ public class Server extends Thread {
         
         int port = 9999;
         System.out.println("Server started");
+        registerServer("addService");
         registerServer("encryptionService");
-        //registerServer("addService");
        
 
         ServerSocket listener = new ServerSocket(port);

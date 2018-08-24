@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException; 
 import java.io.BufferedReader; 
 import java.io.IOException; 
+import java.util.Random;
 
 /**
  * Server
@@ -36,6 +37,10 @@ public class Server2 extends Thread {
                 reply = String.valueOf(findGCD(Integer.parseInt(values[1]),Integer.parseInt(values[2])) );
                 out.println(reply);
             }
+            else if(values[0].equals("guestLuckyNumberService")){
+                reply = matchNumber(Integer.parseInt(values[1]));
+                out.println(reply);
+            }
            
            
         } catch (Exception e) {
@@ -56,11 +61,31 @@ public class Server2 extends Thread {
         return gcd;
     }
 
+    public String matchNumber(int nm){
+        Random numberrandom = new Random();
+        int luckyNumber = numberrandom.nextInt(10 - 1 + 1) + 1;
+        String result = "You lost";
+
+        if(nm > 10 || nm < 0){
+            result = "Plese guest the number between 1 to 10";
+        }
+        else if(nm == luckyNumber){
+            result = "Congratulations!!You won.You guest the right number";
+        }
+        else{
+            result = "Soory!! you lost. Try again..";
+        }
+
+        return result;
+
+    }
+
     public static void main(String[] args) throws Exception {
         
         int port = 9998;
         System.out.println("Server started");
         registerServer("findGCDService");
+        registerServer("guestLuckyNumberService");
        
 
         ServerSocket listener = new ServerSocket(port);

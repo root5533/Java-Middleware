@@ -81,6 +81,14 @@ class Middleware {
         if (request[0].equalsIgnoreCase("registerService")) {
             middleware.registerService(request[1], request[2], request[3]);
         }
+        if (request[0].equalsIgnoreCase("lookupService")) {
+           if(Service_Directory.containsKey(request[1])){
+            out.println(request[1] + " is available in service directory");
+           }
+           else{
+            out.println(request[1] + " is not available in service directory");
+           }
+        }
         if ( Service_Directory.containsKey(request[0]) ) {
             String value[] = Service_Directory.get(request[0]);
             middleware.connectService(value, findRequest);

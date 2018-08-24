@@ -45,13 +45,13 @@ class Middleware {
 
     public void registerService(String serviceName, String host, String portNumber) {
         System.out.println("Register service " + serviceName);
-        Service_Directory = new HashMap<String, String[]>();
         Service_Directory.put(serviceName, new String[]{host, portNumber});
         out.println("Service : " + serviceName + " registered");
     }
 
     public void initialize() throws Exception {
         System.out.println("Middleware service started");
+        Service_Directory = new HashMap<String, String[]>();
         listener = new ServerSocket(mware_port);
         try {
             while (true) {

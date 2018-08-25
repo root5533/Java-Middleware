@@ -20,7 +20,7 @@ This is a Java Middlware that facilating client to requst services in various se
 
     java Server
     ```
-3. compile & run Client. 
+3. compile & run Client.\
    client can lookup the services.
      ```
     javac Client.java

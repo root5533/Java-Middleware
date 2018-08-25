@@ -10,8 +10,8 @@ This is a Java Middlware that facilating client to requst services in various se
     java Middleware
     ```
 2. compile & run Server.Here it register the server's all services in Service directory .(currently implemented two servers).
-   Available services:
-	Server: addService, encryptionService
+   Available services:&nbsp;
+	Server: addService, encryptionService&nbsp;
 	Server2: findGCDService, guestLuckyNumberService
 	
  
@@ -26,7 +26,7 @@ This is a Java Middlware that facilating client to requst services in various se
     javac Client.java
    
     java Client lookupService <ServiceName>
-    ex:  java Client lookupService addService
+    ex: java Client lookupService addService
     ```
 
    client can requst the services
